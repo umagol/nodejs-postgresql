@@ -273,7 +273,7 @@ Our first endpoint will be a GET request. Inside the pool.query() we can put the
     })
     }
 
-GET a single user by ID
+## GET a single user by ID
 
 For our /users/:id request, we’ll be getting the custom id parameter by the URL and using a WHERE clause to display the result.
 
@@ -290,7 +290,7 @@ In the SQL query, we’re looking for id=$1. In this instance, $1 is a numbered 
     })
     }
 
-POST a new user
+## POST a new user
 
 <p”>The API will take a GET and POST request to the /users endpoint. In the POST request, we’ll be adding a new user. In this function, we’re extracting the name and email properties from the request body, and INSERTing the values.
 
@@ -305,7 +305,7 @@ POST a new user
     })
     }
 
-PUT updated data in an existing user
+## PUT updated data in an existing user
 
 The /users/:id endpoint will also take two HTTP requests — the GET we created for getUserById, and also a PUT, to modify an existing user. For this query, we’ll combine what we learned in GET and POST to use the UPDATE clause.
 
@@ -327,7 +327,7 @@ It is worth noting that PUT is idempotent, meaning the exact same call can be ma
     )
     }
 
-DELETE a user
+## DELETE a user
 
 Finally, we’ll use the DELETE clause on /users/:id to delete a specific user by id. This call is very similar to our getUserById() function.
 
@@ -430,7 +430,7 @@ Here is our complete queries.js file.
     deleteUser,
     }
 
-Setting up CRUD functions in a REST API
+### Setting up CRUD functions in a REST API
 
 Now that we have all of our queries, the last thing we need to do is pull them into the index.js file and make endpoint routes for all the query functions we created.
 
@@ -479,7 +479,3 @@ Now with just these two files, we have a server, database, and API all set up. Y
 
     node index.js
 App running on port 3000.
-
-Now if you go to http://localhost:3000/users or http://localhost:3000/users/1, you’ll see the JSON response of the two GET requests. But how can we test our POST, PUT, and DELETE requests?
-
-This can be done with curl, a command line tool that’s already available on your terminal. Below are examples you can run on the command line to test all of the protocols.
