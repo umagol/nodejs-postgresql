@@ -1,14 +1,22 @@
-const { request, response } = require('express');
-const express = require('express');
+/**
+ * Name: Satish Umagol
+ * Project Name: Nodejs and postgresql Database
+ * Git Repository: https://github.com/umagol/nodejs-postgresql
+ * version: 1.0.0
+ */
+
+const express = require('express'); //  import expressjs
 const app = express();
-const port = 3000;
-const Pool = require('pg').Pool;
-const dotenv = require('dotenv');
+const port = 3000; // select port for server 
+const Pool = require('pg').Pool; // import postgresql package in npm 
+// First install package => npm install pg --save
+const dotenv = require('dotenv'); //dotenv for access .env file
 
-dotenv.config();
+dotenv.config(); // configure .env file 
 
-app.use(express.json());
+app.use(express.json()); // user body parser
 
+// Data Base Connection
 const pool = new Pool({
     user: process.env.UserName,
     host: process.env.Host,
@@ -17,7 +25,10 @@ const pool = new Pool({
     port: process.env.Port
 });
 
-
+/**
+ * First API Get user
+ * Get all user in Database
+ */
 app.get('/getuser', (req, res) => {
     try {
         pool.query('SELECT * FROM users ORDER BY ID ASC', (err, results) => {
@@ -31,6 +42,9 @@ app.get('/getuser', (req, res) => {
     }
 });
 
+/**
+ * Select specifc user from database
+ */
 app.get('/getuser/:id', (req, res) => {
     try {
         const id = parseInt(req.params.id);
@@ -46,6 +60,9 @@ app.get('/getuser/:id', (req, res) => {
     }
 });
 
+/**
+ * Update User Data
+ */
 app.put('/updateuser/:id', (req, res) => {
     try {
 
@@ -67,6 +84,10 @@ app.put('/updateuser/:id', (req, res) => {
     }
 });
 
+/**
+ * Add New User in Database
+ */
+
 app.post('/adduser', (req, res) => {
     try {
 
@@ -84,6 +105,9 @@ app.post('/adduser', (req, res) => {
     }
 });
 
+/**
+ * delete User from Database
+ */
 app.delete('/deleteuser/:id', (req, res) => {
     try {
         const id = parseInt(req.params.id)
@@ -100,4 +124,7 @@ app.delete('/deleteuser/:id', (req, res) => {
     }
 });
 
+//Listen server on port 3000
 app.listen(port, () => console.log(`Server is running on ${port}`));
+
+//-----------------------------------------------------------------------
